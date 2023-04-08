@@ -3,9 +3,8 @@ To make sure my implementation of a bag of marbles is workings is to write tests
 make sure the amount of marbles does not go above the range of the random function. If so, this method would return a message that says
 "Cannot perform this feature at the moment. Out of range".
 
-Attempt to implement your bag of marbles in a program as simply as possible (Note: you can fail this implementation and still get full points on the assignment based on design, documentation, and whatever your attempt at implementation is)!
+I tried implementing a bag of marble by making a list of items. Next, I try adding and removing marbles and outputting the output but it is not working. cout << is not working.
 
-test our implementation in a driver file with our tests (a driver file is just the file we would use to launch our program)
-Note: This assignment is intended to get you thinking about how simple your implementations could be, to make sure your programming environment is set up properly, and to get you thinking about how we store data in different structures.
+Need to test my code somehow.
 
 Once you have implemented and tested your code, add to the README file what line(s) of code or inputs and outputs show your work meeting each of the above requirements (or better, include a small screen snip of where it meets the requirement!).
