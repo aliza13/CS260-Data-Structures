@@ -1,0 +1,19 @@
+In your README file (feel free to include labeled drawings!) explain what a program could do to model a bag of marbles, with a list of properties (variables) and behaviors (methods), including at least something like the following:
+
+some way of representing marbles (what makes up a marble in this program?),
+
+a way to add new marbles into the bag (how do we interact with marbles and add them into the bag?),
+
+a way to remove a marble out of the bag (perhaps a random marble taken out of the bag?),
+
+a few ways that we could use to show that our implementation should be working correctly (tests),
+(perhaps you start with an empty bag, put a marble in with some known values, then you pull the marble out and verify that it has the same values, perhaps you try to pull a marble out of an empty bag, perhaps you try to add 3 billion marbles... maybe you do not have to go that high or maybe your solution is smart enough to deal with this 🙂)
+
+Attempt to implement your bag of marbles in a program as simply as possible (Note: you can fail this implementation and still get full points on the assignment based on design, documentation, and whatever your attempt at implementation is)!
+
+test our implementation in a driver file with our tests (a driver file is just the file we would use to launch our program)
+Note: This assignment is intended to get you thinking about how simple your implementations could be, to make sure your programming environment is set up properly, and to get you thinking about how we store data in different structures.
+
+Once you have implemented and tested your code, add to the README file what line(s) of code or inputs and outputs show your work meeting each of the above requirements (or better, include a small screen snip of where it meets the requirement!).
+
+Submit a link to your repo to Moodle as a reminder to us to grade your work 🙂!
