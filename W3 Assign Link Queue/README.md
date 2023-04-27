@@ -1,5 +1,4 @@
 Assignment 3 (Linked Queue):
-
 Based on what we know about linked lists, stacks, and queues, design a linked queue (a queue using a linked-list to store the data in the structure)
 
 Design, implement, and test a Queue data structure that:
