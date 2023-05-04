@@ -61,9 +61,9 @@ public: // funcs in here can be called anywhere in code
             delete temp; // don't need temp anymore
         }
     }
-    
+    /* inspiration https://www.includehelp.com/stl/print-all-elements-of-a-queue.aspx */
     void printQueue() {
-    Node* current = head;
+    Node* current = head; // current ptr
     while (current != NULL) {
         cout << (*current).data << " ";
         current = (*current).next;
@@ -75,8 +75,8 @@ public: // funcs in here can be called anywhere in code
 
 // has to have a main func no matter what
 int main(){
-    LinkedQueue q;
-    q.enqueue(10);
+    LinkedQueue q; // q is an instance of LQ
+    q.enqueue(10); // using enqueue method
     q.enqueue(20);
     q.enqueue(0);
     q.dequeue();
