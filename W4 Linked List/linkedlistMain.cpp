@@ -1,4 +1,6 @@
 #include <iostream>
+#include <new>
+#include <cstdlib>
 
 using std::cout;
 using std::endl;
@@ -13,14 +15,17 @@ struct Node {
 class LinkedList {
 private:
     Node* head; // Node* is a pointer type
-    Node* tail;
 
 public:
+// insert function that takes a value and inserts it into a given position into the list
+    LinkedList(){
+        head = NULL;
+    }
 
     void insert (int data, int n) {
         Node* temp = new Node(); 
         temp -> data = data; // temp pts to data
-        temp -> next = Null; // next is empty
+        temp -> next = nullptr; // next is empty
 
         if (n == 1) {
             temp -> next = head; 
@@ -30,11 +35,11 @@ public:
 
         Node* temp2 = head; // another ptr to Node, starts at head
         for (int i = 0; i < n-2; i++) {
-            temp2 -> next = temp2 -> next; // building links
-            temp2 -> next = temp;
+            temp2 = temp2 -> next;
 
         }
-
+            temp -> next = temp2 -> next; // building links
+            temp2 -> next = temp;
     }
 
     /* inspiration https://www.includehelp.com/stl/print-all-elements-of-a-queue.aspx */
@@ -48,10 +53,6 @@ public:
 }
 };
 
-// add function that takes a value and inserts it into a given position into the list
-// myList.add(someValue, somePosition)
-
-// test ?
 
 
 // remove function that takes a position and removes the value stored at that position of the list and returns it
@@ -68,6 +69,10 @@ public:
 // test that that position exists
 
 int main(){
+    LinkedList ll;
 
+    ll.insert(1,1);
+    ll.insert(4,2);
+    ll.insert(7,3);
 
 }
