@@ -5,67 +5,45 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-// linked list
+
 struct Node { 
     int data;
-    Node* next; // node ptr will point to the next node in linked list
+    Node* next; 
 };
 
 class LinkedList {
 private:
-    Node* head; // Node* is a pointer type
+    Node* head; 
 
 public:
-// insert function that takes a value and inserts it into a given position into the list
     LinkedList(){
-        head = NULL; // list is empty
+        head = NULL; 
     }
 
-    void insert (int data, int n) {
+// ascending order list
+    void insert (int data) {
         Node* temp = new Node(); 
         temp -> data = data; // temp pts to data
         temp -> next = NULL; // next is empty
 
-        if (n == 1) {
+        if (data < head ->data) { // if data is < head, insert at beginning 
             temp -> next = head; 
             head = temp;
             return;
         }
 
-        Node* temp2 = head; // another ptr to Node, starts at head
-        for (int i = 0; i < n-2; i++) { 
+        if (head == NULL) {
+            head = temp; 
+        } else {
+        Node* temp2 = head; 
+
+        for (int i = 0; data < temp2 -> next -> data; i++) { // where temp2 is larger than data
             temp2 = temp2 -> next;
 
-        }
+            }
             temp -> next = temp2 -> next; // building links
             temp2 -> next = temp; 
-    }
-
-    void deleteNode(){
-// remove function that takes a position and removes the value stored at that position of the list and returns it
-        int n;
-        cout << "Enter the position of the node you want to be deleted: ";
-        cin >> n; // stores user input in n var
-
-        Node* temp = head; // temp ptr var pointing at head
-        // test should be if head is the wanted deletion
-        if (n == 1) { // special case: deleting the head node
-            head = head->next;
-            delete temp;
-            return;
         }
-    // n -2 position 
-        for(int i = 0; i < n-2; i++){
-            temp = temp -> next;
-            if (temp == NULL || temp->next == NULL) { // position is out of bounds
-                cout << "Error: Position out of bounds :( " << endl;
-                return;
-            }
-        }
-
-        Node* temp2 = temp -> next; // what n is
-        temp -> next = temp2 -> next; // + 1
-        delete(temp2); // to free memory 
     }
 
 // a get function that takes a position and returns that value without removing it
@@ -100,15 +78,11 @@ public:
 int main(){
     LinkedList ll;
 
-    ll.insert(1,1);
-    ll.insert(4,2);
-    ll.insert(5,3);
+    ll.insert(1);
+    ll.insert(4);
+    ll.insert(5);
 
-    ll.printList(); // first test worked!
-
-    ll.deleteNode();
     ll.printList(); 
-
 
     int positionIndex;
     cout << "Enter the index of the node you want to get: ";
