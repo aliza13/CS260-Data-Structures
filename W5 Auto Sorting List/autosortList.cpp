@@ -26,23 +26,26 @@ public:
         temp -> data = data; // temp pts to data
         temp -> next = NULL; // next is empty
 
-        if (data < head ->data) { // if data is < head, insert at beginning 
-            temp -> next = head; 
-            head = temp;
-            return;
-        }
-
         if (head == NULL) {
             head = temp; 
+            // temp -> next = NULL;
         } else {
-        Node* temp2 = head; 
+            if (data < head -> data) { // if data is < head, insert at beginning 
+                temp -> next = head; 
+                head = temp;
+        } else {
+            Node* temp2 = head; 
 
-        for (int i = 0; data < temp2 -> next -> data; i++) { // where temp2 is larger than data
-            temp2 = temp2 -> next;
-
+            // for (int i = 0; data < temp2 -> next -> data; i++) { // where temp2 is larger than data
+            //     temp2 = temp2 -> next;
+            //     }
+            // lines 43-45 were taken from chat gpt... my for loop was not working
+            while (temp2->next != NULL && data > temp2->next->data) {
+                temp2 = temp2->next;
             }
-            temp -> next = temp2 -> next; // building links
-            temp2 -> next = temp; 
+                temp -> next = temp2 -> next; // building links
+                temp2 -> next = temp; 
+            }
         }
     }
 
@@ -78,19 +81,12 @@ public:
 int main(){
     LinkedList ll;
 
-    ll.insert(1);
+    ll.insert(7);
     ll.insert(4);
     ll.insert(5);
+    ll.insert(2);
 
     ll.printList(); 
-
-    int positionIndex;
-    cout << "Enter the index of the node you want to get: ";
-    cin >> positionIndex;
-    int value = ll.getNode(positionIndex);
-    if (value != -1) { // test for error
-        cout << "Value at position " << positionIndex << " is " << value << endl;
-    }
 
     return 0;
 }
