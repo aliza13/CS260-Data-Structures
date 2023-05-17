@@ -9,7 +9,6 @@ automatically inserts values in the correct position based on some order of sort
 efficiently searches for elements (likely binary search for the array list, but what about the linked-list?)
 
 Make a chart to compare the algorithmic complexity (use Big-O notation) of your insert, remove, and search algorithms you used for your structures
+A: O(n) is the algorithmic complexity for my insert function because in worst case it will traverse through the whole list (look at each element).
 
 Once you have implemented and tested your code, add to the README file what line(s) of code or inputs and outputs show your work meeting each of the above requirements (or better, include a small screen snip of where it meets the requirement!).
-
-Note: This assignment is to get you to think about and practice with structures that have automatically enforced properties (perhaps auto sorted, since we know sorting can be expensive... and how these might be able to be spread out over time)
