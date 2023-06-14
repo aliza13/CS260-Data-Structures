@@ -8,6 +8,7 @@ using std::cout;
 using std::endl;
 
 struct Edge {
+    // edge in graph
     std::string source;
     std::string destination;
     double weight;
@@ -16,6 +17,7 @@ struct Edge {
 };
 
 struct CompareEdges {
+    // which edge is more "important" based on struct Edge weight
     bool operator()(const Edge& e1, const Edge& e2) {
         return e1.weight > e2.weight;
     }
@@ -23,10 +25,12 @@ struct CompareEdges {
 
 class TransactionGraph {
 private:
-    std::unordered_map<std::string, std::vector<std::pair<std::string, double>>> graph; // Adjacency list representation
+    // graph stores unordered map
+    std::unordered_map<std::string, std::vector<std::pair<std::string, double>>> graph;
 
 public:
     void addTransaction(const std::string& sender, const std::string& receiver, double amount) {
+        // adds transaction between two vertices (addys)
         addVertex(sender);
         addVertex(receiver);
         graph[sender].push_back({receiver, amount});
@@ -45,6 +49,8 @@ public:
     }
 
     std::vector<Edge> minimumSpanningTree() {
+        // using Prims Algo 
+        // https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/
         std::unordered_set<std::string> visited;
         std::priority_queue<Edge, std::vector<Edge>, CompareEdges> pq;
         std::vector<Edge> minimumSpanningTree;
@@ -74,12 +80,13 @@ public:
 
             cout << "Added edge: " << currentEdge.source << " -> " << currentEdge.destination << ", Weight: " << currentEdge.weight << endl;
         }
-
+        // returns vector w edges of min tree
         return minimumSpanningTree;
     }
 
 private:
     void enqueueEdges(const std::string& node, std::priority_queue<Edge, std::vector<Edge>, CompareEdges>& pq) {
+        // comparing
         for (const auto& neighbor : graph[node]) {
             const std::string& nextNode = neighbor.first;
             const double weight = neighbor.second;
@@ -94,6 +101,7 @@ int main() {
     TransactionGraph transactionGraph;
 
     // Example Ethereum transactions
+    // can replace addys with real eth addys
     transactionGraph.addTransaction("Address1", "Address2", 0.01);
     transactionGraph.addTransaction("Address2", "Address3", 1.005);
     transactionGraph.addTransaction("Address1", "Address3", 0.15);
@@ -103,7 +111,7 @@ int main() {
     cout << "Calculating the minimum spanning tree..." << endl;
     std::vector<Edge> mst = transactionGraph.minimumSpanningTree();
 
-    // Print the edges in the minimum spanning tree
+    // output the edges in the minimum spanning tree
     cout << "Minimum Spanning Tree Edges:" << endl;
     for (const auto& edge : mst) {
         cout << "Edge: " << edge.source << " -> " << edge.destination << ", Weight: " << edge.weight << endl;
