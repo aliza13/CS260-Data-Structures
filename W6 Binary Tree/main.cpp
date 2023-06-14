@@ -1,67 +1,106 @@
+// how binary trees work 
+// https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
 #include <iostream>
+#include <memory>
 
 using std::cout;
 using std::endl;
 
 struct BSTNode {
     int value;
-    BSTNode *left;
-    BSTNode *right;
+    std::unique_ptr<BSTNode> left;
+    std::unique_ptr<BSTNode> right;
 };
 
+class BinarySearchTree {
+private:
+    std::unique_ptr<BSTNode> root; // root of tree
 
-// print values of tree in-order, assuming initial BSTNode is not nullptr
-void inOrderTraversal(BSTNode *current) {
-    // look and go left if not nullptr
-    if(current->left != nullptr) {
-        inOrderTraversal(current->left);
+    void addRecursive(std::unique_ptr<BSTNode>& node, int value) {
+        if (!node) {
+            node = std::make_unique<BSTNode>();
+            node->value = value;
+            return;
+        }
+
+        if (value <= node->value) {
+            addRecursive(node->left, value);
+        } else {
+            addRecursive(node->right, value);
+        }
     }
 
-    // print yo self
-    cout << current->value << ", ";
-
-    // look and go right if not nullptr
-    if(current->right != nullptr) {
-        inOrderTraversal(current->right);
+    BSTNode* findMinNode(BSTNode* node) {
+        if (!node->left) {
+            return node;
+        }
+        return findMinNode(node->left.get());
     }
-}
+
+    void removeRecursive(std::unique_ptr<BSTNode>& node, int value) {
+        if (!node) {
+            return;
+        }
+        // in order traversal 
+        if (value < node->value) {
+            removeRecursive(node->left, value);
+        } else if (value > node->value) {
+            removeRecursive(node->right, value);
+        } else {
+            if (!node->left) {
+                node = std::move(node->right);
+            } else if (!node->right) {
+                node = std::move(node->left);
+            } else {
+                BSTNode* successor = findMinNode(node->right.get());
+                node->value = successor->value;
+                removeRecursive(node->right, successor->value);
+            }
+        }
+    }
+
+    void inOrderTraversalRecursive(const BSTNode* node) {
+        if (node) {
+            inOrderTraversalRecursive(node->left.get());
+            cout << node->value << " ";
+            inOrderTraversalRecursive(node->right.get());
+        }
+    }
+
+public:
+    void add(int value) {
+        addRecursive(root, value);
+    }
+
+    void remove(int value) {
+        removeRecursive(root, value);
+    }
+
+    void inOrderTraversal() {
+        inOrderTraversalRecursive(root.get());
+        cout << endl;
+    }
+};
 
 int main() {
-    auto *root = new BSTNode{40, nullptr, nullptr}; // auto will attempt to autodetect the data type being used
+    BinarySearchTree bst;
 
-    BSTNode *left = new BSTNode{20, nullptr, nullptr};
-    BSTNode *right = new BSTNode{60, nullptr, nullptr};
-    root->left = left;
-    root->right = right;
+    bst.add(5);
+    bst.add(50);
+    bst.add(7);
+    bst.add(20);
+    bst.add(50);
+    bst.add(60);
+    bst.add(110);
 
-    cout << "root->value: " << root->value << endl;
-    cout << "root->left->value: " << root->left->value;
-    cout << " (left->value: " << left->value << ")" << endl;
-    cout << "root->right->value: " << root->right->value;
-    cout << " (right->value: " << right->value << ")" << endl;
+    cout << "In-order traversal: ";
+    bst.inOrderTraversal();  // Should output: 20 30 40 50 60 70 80
 
-    BSTNode *ll = new BSTNode{10, nullptr, nullptr};
-    BSTNode *lr = new BSTNode{30, nullptr, nullptr};
-    root->left->left = ll; // could also use left->left
-    root->left->right = lr;
+    bst.remove(50);
+    bst.remove(7);
 
-    BSTNode *rl = new BSTNode{50, nullptr, nullptr};
-    BSTNode *rr = new BSTNode{70, nullptr, nullptr};
-    root->right->left = rl;
-    root->right->right = rr;
-
-    cout << "root->left->left->value: " << root->left->left->value << endl;
-    cout << "root->left->right->value: " << root->left->right->value << endl;
-    cout << "root->right->left->value: " << root->right->left->value << endl;
-    cout << "root->right->right->value: " << root->right->right->value << endl;
-
-    inOrderTraversal(root);
-
-    // What happens if we run this on a nullptr?
-    // BSTNode * nullNode = nullptr;
-    // inOrderTraversal(nullNode);
-
-    cout << "got to end of program, yay!" << endl;
+    cout << "In-order traversal after removal: ";
+    bst.inOrderTraversal();  // Should output: 20 40 50 60 80
 
     return 0;
 }
