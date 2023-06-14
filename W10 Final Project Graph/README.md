@@ -1,4 +1,4 @@
-(20%) Create a design before you start coding that describes or shows how a graph structure could be used to store some kinds of data and attempt to solve some kind of problem (yes, this can be a game that needs a graph to represent a map!)
+(20%) Create a design before you start coding that describes or shows how a graph structure could be used to store some kinds of data and attempt to solve some kind of problem
 
 (20%) Create some tests (at least two for each piece of functionality) before you start coding...
 
