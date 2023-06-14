@@ -15,3 +15,5 @@
 (10%) Analyze the complexity of all of your graph behaviors (effectively a part of our documentation for grading purposes),
 
 (10%) Once you have implemented and tested your code, add to the README file what line(s) of code or inputs and outputs show your work meeting each of the above requirements (or better, include a small screen snip of where it meets the requirement!).
+The main function calls and outputs data. 
+Most of the functions are O(1). I think my minimum spanning tree function is O(log n) as well as the enqueue Edges function. Those are the two functions that will take the most time.
