@@ -11,7 +11,6 @@ An insert function that places the value at the appropriate location based on it
 
 A contains function that returns whether the value is already in the hashtable
 
-(optional) A delete function that removes a value based on its hash and then returns that value…
 
 Then create a smarter hashtable (double hashing or chaining) including at least the same functions as the simple hashtable
 
